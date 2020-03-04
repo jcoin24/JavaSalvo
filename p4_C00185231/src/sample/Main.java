@@ -1,8 +1,10 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,22 +26,28 @@ public class Main extends Application {
 
         GridPane playerGrid = (GridPane) primaryStage.getScene().lookup("#playerGrid");
 
+        int count = 1;
+
         for (int x = 0; x < playerGrid.getRowCount(); x++){
             for (int y = 0; y < playerGrid.getColumnCount(); y++){
-                Button button = createButton(x,y);
+                Button button = createButton(count);
                 playerGrid.add(button, x, y);
+                count++;
             }
         }
+
+        ObservableList<Node> myList = playerGrid.getChildren();
+        System.out.println(myList.get(5));
 
         primaryStage.show();
     }
 
-    private Button createButton(int x, int y) {
+    private Button createButton(int x) {
         Button button = new Button();
-        button.setText(x + "," + y);
+        button.setText("" + x);
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        button.setOnAction(e -> button.setText("X"));
-        return button ;
+        button.setOnAction(e -> System.out.println(x));
+        return button;
     }
 
 
