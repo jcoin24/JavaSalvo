@@ -25,6 +25,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1000, 400));
 
         GridPane playerGrid = (GridPane) primaryStage.getScene().lookup("#playerGrid");
+        GridPane opponentGrid = (GridPane) primaryStage.getScene().lookup("#opponentGrid");
         HBox boatBox = (HBox) primaryStage.getScene().lookup("#boatColumn");
 
         int count = 1;
@@ -32,7 +33,9 @@ public class Main extends Application {
         for (int x = 0; x < playerGrid.getRowCount(); x++){
             for (int y = 0; y < playerGrid.getColumnCount(); y++){
                 Button button = createButton(count);
+                Button opbutton = opButton(count);
                 playerGrid.add(button, x, y);
+                opponentGrid.add(opbutton, x, y);
                 count++;
             }
         }
@@ -49,6 +52,14 @@ public class Main extends Application {
         return button;
     }
 
+    private Button opButton(int count){
+        Button button = new Button();
+        button.setText("" + count);
+        button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        button.setOnAction(e -> SendAttack(count));
+        return button;
+    }
+
 
     public static void main(String[] args) {
         launch(args);
@@ -59,5 +70,8 @@ public class Main extends Application {
             Button temp = (Button) myList.get(count + x);
             temp.setText("X");
         }
+    }
+    public void SendAttack(int count){
+        System.out.println(count);
     }
 }
