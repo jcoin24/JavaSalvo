@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="1000.0" />
       <HBox prefHeight="100.0" prefWidth="200.0">
@@ -30,7 +34,7 @@
                   </GridPane>
                </children>
             </HBox>
-            <HBox fx:id="boatColumn" prefHeight="100.0" prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0" />
             <HBox prefHeight="600.0" prefWidth="400.0">
                <children>
                   <GridPane gridLinesVisible="true" prefHeight="600.0" prefWidth="400.0">
@@ -52,27 +56,11 @@
                </children></HBox>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your Battlefield" wrappingWidth="403.1367130279541">
-               <font>
-                  <Font name="Comic Sans MS" size="24.0" />
-               </font>
-            </Text>
-            <VBox prefHeight="100.0" prefWidth="230.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opponents field" wrappingWidth="403.1367130279541">
-               <font>
-                  <Font name="Comic Sans MS" size="24.0" />
-               </font>
-            </Text>
-         </children>
-      </HBox>
    </children>
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints />
       <RowConstraints />
    </rowConstraints>
 </GridPane>

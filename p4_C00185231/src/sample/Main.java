@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.net.Socket;
 
 public class Main extends Application {
 
@@ -50,7 +51,14 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        final int httpd = 8081;
+
+        Socket sock = new Socket("localhost", httpd);
+        FromServer fromserver = new FromServer(sock);
+        ToServer   toserver = new ToServer(sock);
+        new Thread(toserver).start();
+        new Thread(fromserver).start();
         launch(args);
     }
 
