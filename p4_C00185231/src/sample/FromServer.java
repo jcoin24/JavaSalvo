@@ -1,3 +1,9 @@
+/*
+  need to add hit detection logic here
+  then send hit stuff to other client
+ */
+
+
 package sample;
 
 

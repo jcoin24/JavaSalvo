@@ -43,6 +43,15 @@ public class Main extends Application {
 
         myList = playerGrid.getChildren();
         primaryStage.show();
+
+
+        final int httpd = 8081;
+
+        Socket sock = new Socket("localhost", httpd);
+        FromServer fromserver = new FromServer(sock);
+        ToServer   toserver = new ToServer(sock, opponentGrid.getChildren());
+        new Thread(toserver).start();
+        new Thread(fromserver).start();
     }
 
     private Button createButton(int count) {
@@ -56,22 +65,13 @@ public class Main extends Application {
     private Button opButton(int count){
         Button button = new Button();
         button.setText("" + count);
+        button.setId("" + count);
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        button.setOnAction(e -> SendAttack(count));
         return button;
     }
 
 
-    public static void main(String[] args) throws Exception {
-        final int httpd = 8081;
-
-        Socket sock = new Socket("localhost", httpd);
-        FromServer fromserver = new FromServer(sock);
-        ToServer   toserver = new ToServer(sock);
-        new Thread(toserver).start();
-        new Thread(fromserver).start();
-        launch(args);
-    }
+    public static void main(String[] args) throws Exception { launch(args); }
 
     public void FillBoat(int count){
         for (int x = 0; x < battleship.size; x++){
