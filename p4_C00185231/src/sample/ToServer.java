@@ -38,7 +38,7 @@ public class ToServer implements Runnable {
   public void run() {
     try {
       while (true) {
-        Thread.sleep((int)(Math.random()*1000));
+        //Thread.sleep((int)(Math.random()*1000));
       }
     } catch (Exception e) {
       System.out.println("Exception: " + e);

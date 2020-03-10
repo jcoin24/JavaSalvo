@@ -18,6 +18,7 @@ public class Main extends Application {
 
     ObservableList<Node> myList;
     Boat battleship = new Boat(3,3,"Battleship", true);
+    GridPane playerGrid;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -25,9 +26,10 @@ public class Main extends Application {
         primaryStage.setTitle("Salvo");
         primaryStage.setScene(new Scene(root, 1000, 400));
 
-        GridPane playerGrid = (GridPane) primaryStage.getScene().lookup("#playerGrid");
+        playerGrid = (GridPane) primaryStage.getScene().lookup("#playerGrid");
         GridPane opponentGrid = (GridPane) primaryStage.getScene().lookup("#opponentGrid");
         HBox boatBox = (HBox) primaryStage.getScene().lookup("#boatColumn");
+
 
         int count = 1;
 
@@ -74,11 +76,42 @@ public class Main extends Application {
     public static void main(String[] args) throws Exception { launch(args); }
 
     public void FillBoat(int count){
-        for (int x = 0; x < battleship.size; x++){
-            Button temp = (Button) myList.get(count + x);
-            temp.setText("X");
+
+        if(battleship.isVertical){
+            if(CompareRowsVert(count, (battleship.size + count)-1)){
+                for (int x = 0; x < battleship.size; x++){
+                    Button temp = (Button) myList.get(count + x);
+                    temp.setText("X");
+                }
+            } else {
+                System.out.println("Row selection not valid");
+            }
+        } else {
+            //System.out.println("Horizontal");
         }
     }
+
+    // Returns true if the row of the index and boatsize are in the same rows if the boat is vertical
+    public boolean CompareRowsVert(int count, int boatSize){
+
+        boolean match;
+
+        if (count <= 5 && boatSize <= 5){
+            match = true;
+        } else if ((count <= 10 && count >= 6) && (boatSize <= 10 && boatSize >= 6)){
+            match = true;
+        } else if ((count <= 15 && count >= 11) && (boatSize <= 15 && boatSize >= 11)){
+            match = true;
+        }else if ((count <= 20 && count >= 16) && (boatSize <= 20 && boatSize >= 16)){
+            match = true;
+        }else if ((count <= 25 && count >= 21) && (boatSize <= 25 && boatSize >= 21)){
+            match = true;
+        }else
+            match = false;
+
+        return  match;
+    }
+
     public void SendAttack(int count){
         System.out.println(count);
     }

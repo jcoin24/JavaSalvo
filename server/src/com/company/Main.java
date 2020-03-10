@@ -10,9 +10,11 @@ import java.net.*;
 
 public class Main {
 
-
+    public static String output;
     
     public static void main(String[] args) throws Exception {
+        boolean turn = true;
+        boolean gameStart = false;
         final int httpd = 8081;
         ServerSocket serverSock = new ServerSocket(httpd);
         System.out.println("server listening on local port 8081");
@@ -20,24 +22,20 @@ public class Main {
         
         while (true) {
             Socket client1 = serverSock.accept();
+            FromClient fromClient1 = new FromClient(client1);
+            ToClient   toClient1 = new ToClient(client1);
+            new Thread(fromClient1).start();
+            new Thread(toClient1).start();
             System.out.println("client1 has connected to the socket");
-            System.out.println("server listening on local port 8081");
             System.out.println("Waiting on second client");
 
             Socket client2 = serverSock.accept();
             System.out.println("client2 has connected to the socket");
-
-            FromClient fromclient = new FromClient(client1, client2);
-            ToClient   toclient = new ToClient(client1);
-            new Thread(fromclient).start();
-            new Thread(toclient).start();
-
-            FromClient fromclient1 = new FromClient(client2, client1);
-            ToClient   toclient1 = new ToClient(client2);
-            new Thread(fromclient1).start();
-            new Thread(toclient1).start();
+            FromClient fromClient2 = new FromClient(client2);
+            ToClient   toClient2 = new ToClient(client2);
+            new Thread(fromClient2).start();
+            new Thread(toClient2).start();
             System.out.println("game start");
-
         }
     }
     
