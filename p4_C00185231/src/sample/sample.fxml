@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -43,24 +41,21 @@
                <children>
                   <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="225.0">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="275.0" prefWidth="200.0" text=" BattleShip +++" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="battleshipButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectBattleship" prefHeight="275.0" prefWidth="200.0" text=" BattleShip +++" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font name="Comic Sans MS" size="24.0" />
                            </font>
                         </Button>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="263.0" prefWidth="200.0" text="Cruiser **">
+                        <Button fx:id="cruiserButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectCruiser" prefHeight="263.0" prefWidth="200.0" text="Cruiser **">
                            <font>
                               <Font name="Comic Sans MS" size="24.0" />
                            </font>
                         </Button>
-                        <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="167.0" prefWidth="200.0" text="Set Horizontal">
-                           <opaqueInsets>
-                              <Insets left="10.0" />
-                           </opaqueInsets>
+                        <Button fx:id="checkHorizontal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setHorizontal" text="Set Horizontal">
                            <font>
-                              <Font name="Comic Sans MS" size="18.0" />
+                              <Font name="Comic Sans MS" size="24.0" />
                            </font>
-                        </CheckBox>
+                        </Button>
                      </children>
                   </VBox>
                </children></HBox>
@@ -92,9 +87,9 @@
                   <Font name="Comic Sans MS" size="24.0" />
                </font>
             </Label>
-            <HBox prefHeight="100.0" prefWidth="213.0">
+            <HBox prefHeight="113.0" prefWidth="206.0">
                <children>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="221.0" text="Ready Up">
+                  <Button fx:id="readyButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#readyGame" prefHeight="129.0" prefWidth="206.0" text="Ready Up">
                      <font>
                         <Font name="Comic Sans MS" size="24.0" />
                      </font>

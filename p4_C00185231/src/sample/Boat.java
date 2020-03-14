@@ -21,4 +21,8 @@ public class Boat {
     public void setPlaced(boolean placed) {
         isPlaced = placed;
     }
+
+    public void setVertical() {
+        isVertical = !this.isVertical;
+    }
 }
