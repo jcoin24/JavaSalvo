@@ -36,9 +36,7 @@ public class Main extends Application {
 
         shipList.add(battleship);
         shipList.add(cruiser);
-
         currentBoat = shipList.get(0);
-
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Salvo");
         primaryStage.setScene(new Scene(root, 1000, 400));
@@ -47,6 +45,7 @@ public class Main extends Application {
         GridPane opponentGrid = (GridPane) primaryStage.getScene().lookup("#opponentGrid");
         HBox boatBox = (HBox) primaryStage.getScene().lookup("#boatColumn");
         Button readyButton = (Button) primaryStage.getScene().lookup("#readyButton");
+
 
 
         int count = 1;
@@ -95,7 +94,6 @@ public class Main extends Application {
 
     // Places the boat on the players grid if a valid placement
     public void FillBoat(int count){
-
         // Check if the boat is placed and if not to place it vertically
         if(currentBoat.isVertical && !currentBoat.isPlaced){
             // Check if the row placement is valid or not
@@ -206,7 +204,6 @@ public class Main extends Application {
     public static void SetCurrentBoatHorizontal(){
         currentBoat.setVertical();
     }
-
 
     public void SendAttack(int count){
         System.out.println(count);
