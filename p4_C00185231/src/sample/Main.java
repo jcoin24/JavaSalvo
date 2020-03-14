@@ -24,8 +24,9 @@ public class Main extends Application {
     // Values for defining the ships and list to store them
     Boat battleship = new Boat(3,3,"Battleship", true);
     Boat cruiser = new Boat(2,2,"Cruiser", true);
-    List<Boat> shipList = new ArrayList<Boat>();
-    int currentBoat = 0;
+    static List<Boat> shipList = new ArrayList<Boat>();
+    static Boat currentBoat;
+
 
     // Declare playerGrid variable
     GridPane playerGrid;
@@ -35,7 +36,7 @@ public class Main extends Application {
 
         shipList.add(battleship);
         shipList.add(cruiser);
-
+        currentBoat = shipList.get(0);
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Salvo");
         primaryStage.setScene(new Scene(root, 1000, 400));
@@ -43,6 +44,8 @@ public class Main extends Application {
         playerGrid = (GridPane) primaryStage.getScene().lookup("#playerGrid");
         GridPane opponentGrid = (GridPane) primaryStage.getScene().lookup("#opponentGrid");
         HBox boatBox = (HBox) primaryStage.getScene().lookup("#boatColumn");
+        Button readyButton = (Button) primaryStage.getScene().lookup("#readyButton");
+
 
 
         int count = 1;
@@ -91,21 +94,86 @@ public class Main extends Application {
 
     // Places the boat on the players grid if a valid placement
     public void FillBoat(int count){
+        // Check if the boat is placed and if not to place it vertically
+        if(currentBoat.isVertical && !currentBoat.isPlaced){
+            // Check if the row placement is valid or not
+            if(CompareRowsVert(count, (currentBoat.size + count)-1)){
 
+                // Place either a + or a * for the type of boat selected
+                int[] locations = new int[currentBoat.size];
+                boolean valid = false;
 
-        if(battleship.isVertical && !battleship.isPlaced){
-            if(CompareRowsVert(count, (battleship.size + count)-1)){
-                for (int x = 0; x < battleship.size; x++){
+                // Iterate through the location to be placed and see if it is valid
+                for (int x = 0; x < currentBoat.size; x++){
+                    locations[x] = count + x;
                     Button temp = (Button) myList.get(count + x);
-                    temp.setText("X");
+                    try{
+                        Integer.parseInt(temp.getText());
+                        valid = true;
+                    }catch (Exception e){
+                        valid = false;
+                        System.out.println("Ship already exist there");
+                        break;
+                    }
                 }
-                battleship.setPlaced(true);
+
+                if(valid){
+                    currentBoat.setPlaced(true);
+                    for (int x = 0; x < locations.length; x++){
+                        Button temp = (Button) myList.get(locations[x]);
+
+                        if(currentBoat.type.compareTo("Battleship") == 0){
+                            temp.setText("+");
+                        }else
+                            temp.setText("*");
+                    }
+                }
+
             } else {
                 System.out.println("Row selection not valid");
             }
-        } else {
-            //System.out.println("Horizontal");
-        }
+
+            // Check if the boat is horizontal and can be placed
+        } else if(!currentBoat.isVertical && !currentBoat.isPlaced){
+
+            //Check if the boat can be placed horizontally
+            if((currentBoat.size + 7 + count) < myList.size()){
+
+                // Place either a + or a * for the type of boat selected
+                int tempLocation = 0;
+                int[] locations = new int[currentBoat.size];
+                boolean valid = false;
+
+                // Iterate through the location to be placed and see if it is valid
+                for (int x = 0; x < currentBoat.size; x++){
+                    locations[x] = count + x + tempLocation;
+                    Button temp = (Button) myList.get(count + x + tempLocation);
+                    tempLocation += 4;
+                    try{
+                        Integer.parseInt(temp.getText());
+                        valid = true;
+                    }catch (Exception e){
+                        valid = false;
+                        System.out.println("Ship already exist there");
+                        break;
+                    }
+                }
+
+                if(valid){
+                    currentBoat.setPlaced(true);
+                    for (int x = 0; x < locations.length; x++){
+                        Button temp = (Button) myList.get(locations[x]);
+
+                        if(currentBoat.type.compareTo("Battleship") == 0){
+                            temp.setText("+");
+                        }else
+                            temp.setText("*");
+                    }
+                }
+            }else
+                System.out.println("Invalid vertical placement");
+        }else
+            System.out.println("Error invalid placement");
     }
 
     // Returns true if the row of the index and boatsize are in the same rows if the boat is vertical
@@ -127,6 +195,14 @@ public class Main extends Application {
             match = false;
 
         return  match;
+    }
+
+    public static void setCurrentBoat(int num){
+        currentBoat = shipList.get(num);
+    }
+
+    public static void SetCurrentBoatHorizontal(){
+        currentBoat.setVertical();
     }
 
     public void SendAttack(int count){
