@@ -13,15 +13,29 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application {
 
+    // Declared list to have all the Nodes of the gridpane
     ObservableList<Node> myList;
+
+    // Values for defining the ships and list to store them
     Boat battleship = new Boat(3,3,"Battleship", true);
+    Boat cruiser = new Boat(2,2,"Cruiser", true);
+    List<Boat> shipList = new ArrayList<Boat>();
+    int currentBoat = 0;
+
+    // Declare playerGrid variable
     GridPane playerGrid;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        shipList.add(battleship);
+        shipList.add(cruiser);
+
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Salvo");
         primaryStage.setScene(new Scene(root, 1000, 400));
@@ -75,14 +89,17 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception { launch(args); }
 
+    // Places the boat on the players grid if a valid placement
     public void FillBoat(int count){
 
-        if(battleship.isVertical){
+
+        if(battleship.isVertical && !battleship.isPlaced){
             if(CompareRowsVert(count, (battleship.size + count)-1)){
                 for (int x = 0; x < battleship.size; x++){
                     Button temp = (Button) myList.get(count + x);
                     temp.setText("X");
                 }
+                battleship.setPlaced(true);
             } else {
                 System.out.println("Row selection not valid");
             }

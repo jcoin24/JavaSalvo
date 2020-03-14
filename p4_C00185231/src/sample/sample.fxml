@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="1000.0" />
       <HBox prefHeight="100.0" prefWidth="200.0">
@@ -29,7 +39,31 @@
                   </GridPane>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="225.0">
+                     <children>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="275.0" prefWidth="200.0" text=" BattleShip +++" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="Comic Sans MS" size="24.0" />
+                           </font>
+                        </Button>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="263.0" prefWidth="200.0" text="Cruiser **">
+                           <font>
+                              <Font name="Comic Sans MS" size="24.0" />
+                           </font>
+                        </Button>
+                        <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="167.0" prefWidth="200.0" text="Set Horizontal">
+                           <opaqueInsets>
+                              <Insets left="10.0" />
+                           </opaqueInsets>
+                           <font>
+                              <Font name="Comic Sans MS" size="18.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+               </children></HBox>
             <HBox prefHeight="600.0" prefWidth="400.0">
                <children>
                   <GridPane fx:id="opponentGrid" gridLinesVisible="true" prefHeight="600.0" prefWidth="400.0">
@@ -51,11 +85,34 @@
                </children></HBox>
          </children>
       </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="403.0" text="Your Board">
+               <font>
+                  <Font name="Comic Sans MS" size="24.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="213.0">
+               <children>
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="221.0" text="Ready Up">
+                     <font>
+                        <Font name="Comic Sans MS" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="405.0" text="Oponents Board">
+               <font>
+                  <Font name="Comic Sans MS" size="24.0" />
+               </font>
+            </Label>
+         </children></HBox>
    </children>
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
+      <RowConstraints />
       <RowConstraints />
    </rowConstraints>
 </GridPane>
