@@ -17,20 +17,23 @@ public class ToClient implements Runnable {
     public ToClient(Socket sock)throws Exception {
         this.sock = sock;
         out = new DataOutputStream(sock.getOutputStream());
+        in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
     }
 
     public void run() {
+        String input;
         try {
-            while (true) {
-                //Thread.sleep((int)(Math.random()*1000));
+            while ((input=in.readLine()) != null) {
+                out.writeBytes(input + "\n");
             }
+            out.flush();
         } catch (Exception e) {
-                System.out.println("Exception: " + e);
+            System.out.println("Exception toClient first: " + e);
         } finally {
             try {
-                out.close();
+                //out.close();
             } catch (Exception e) {
-                System.out.println("Exception: " + e);
+                System.out.println("Exception toClient second: " + e);
             }
         }
     }
