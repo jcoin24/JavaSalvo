@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import java.io.*;
 import java.net.*;
 
-public class ToServer implements Runnable {
+public class ToServer {
 
   Socket sock;
   BufferedReader in = null;
@@ -26,29 +26,15 @@ public class ToServer implements Runnable {
       Button buttom = (Button)opButtons.get(i); // yes we do mean buttom
       buttom.setOnAction(event -> {
         try {
+          System.out.println("Sending '" + buttom.getId() + "' to other client");
           out.writeBytes( buttom.getId() + "\n");
           out.flush();
         } catch (IOException e) {
-          e.printStackTrace();
+          System.out.println("Exception: " + e);
         }
       });
     }
   }
 
-  public void run() {
-    try {
-      while (true) {
-        //Thread.sleep((int)(Math.random()*1000));
-      }
-    } catch (Exception e) {
-      System.out.println("Exception: " + e);
-    } finally {
-      try {
-        out.close();
-      } catch (Exception e) {
-        System.out.println("Exception: " + e);
-      }
-    }
-  }
 
 } // end of class ToServer

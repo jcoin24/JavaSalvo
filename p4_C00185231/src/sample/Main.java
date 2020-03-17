@@ -69,7 +69,6 @@ public class Main extends Application {
         Socket sock = new Socket("localhost", httpd);
         FromServer fromserver = new FromServer(sock);
         ToServer   toserver = new ToServer(sock, opponentGrid.getChildren());
-        new Thread(toserver).start();
         new Thread(fromserver).start();
     }
 
