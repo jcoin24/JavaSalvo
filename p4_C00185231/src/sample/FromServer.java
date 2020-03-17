@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import java.awt.*;
 import java.io.*;
 import java.net.*;
+import java.util.MissingFormatArgumentException;
 
 public class FromServer implements Runnable {
 
@@ -41,13 +42,38 @@ public class FromServer implements Runnable {
         try{
           int target = Integer.parseInt(input);
           Button tempButton = (Button) Main.myList.get(target);
-          if(tempButton.getText().compareTo("+") == 0 || tempButton.getText().compareTo("*") == 0){
-            //((Button) Main.myList.get(target)).setText("Hit");
+          if(tempButton.getText().compareTo("+") == 0){
+
+            Main.shipList.get(0).setHealth();
+            if (Main.shipList.get(0).getHealth() == 0){
+              out.writeBytes("Sunk a battleship\n");
+              System.out.println("Your battleship was sunk");
+            }
             out.writeBytes("Hit! \n");
             System.out.println("Hit");
+
+            Main.playerHealth = --Main.playerHealth;
+
+          }else if(tempButton.getText().compareTo("*") == 0){
+
+            Main.shipList.get(1).setHealth();
+            if (Main.shipList.get(1).getHealth() == 0){
+              out.writeBytes("Sunk a Cruiser\n");
+              System.out.println("Your Cruiser was sunk");
+            }
+            out.writeBytes("Hit! \n");
+            System.out.println("Hit");
+
+            Main.playerHealth = --Main.playerHealth;
+
           }else{
             out.writeBytes("Miss! \n");
             System.out.println("Miss");
+          }
+
+          if(Main.playerHealth == 0){
+            System.out.println("Your Ships are all suck!\n You have sadly Lost\n");
+            out.writeBytes("All enemy ships sunk you have won\n");
           }
 
           out.flush();
