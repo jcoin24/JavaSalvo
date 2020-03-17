@@ -25,4 +25,8 @@ public class Boat {
     public void setVertical() {
         isVertical = !this.isVertical;
     }
+
+    public int getHealth() {
+        return health;
+    }
 }

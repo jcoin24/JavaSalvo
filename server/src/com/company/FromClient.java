@@ -13,29 +13,33 @@ import java.net.*;
 
 public class FromClient implements Runnable {
 
-    Socket sock;
+    Socket client1;
+    Socket client2;
     BufferedReader in;
     DataOutputStream out;
 
-    public FromClient(Socket sock)throws Exception {
-        this.sock = sock;
-        in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-        out = new DataOutputStream(sock.getOutputStream());
+    public FromClient(Socket client1, Socket client2)throws Exception {
+        this.client1 = client1;
+        this.client2 = client2;
+        in = new BufferedReader(new InputStreamReader(client1.getInputStream()));
+        out = new DataOutputStream(client2.getOutputStream());
     }
 
     public void run() {
         String input;
         try {
             while ((input=in.readLine()) != null) {
+                System.out.println("Server received: " + input);
                 out.writeBytes(input + "\n");
-                System.out.println("Input received from client: " + input);
+                out.flush();
             }
         } catch (Exception e) {
-            System.out.println("Exception From client 1: " + e);
+            System.out.println("Exception: " + e);
         }
         finally {
             try {
                 in.close();
+                out.close();
             } catch (Exception e) {}
         }
     }

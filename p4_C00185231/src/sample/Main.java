@@ -19,13 +19,15 @@ import java.util.List;
 public class Main extends Application {
 
     // Declared list to have all the Nodes of the gridpane
-    ObservableList<Node> myList;
+    public static ObservableList<Node> myList;
 
     // Values for defining the ships and list to store them
-    Boat battleship = new Boat(3,3,"Battleship", true);
-    Boat cruiser = new Boat(2,2,"Cruiser", true);
-    static List<Boat> shipList = new ArrayList<Boat>();
+    static Boat battleship = new Boat(3,3,"Battleship", true);
+    static Boat cruiser = new Boat(2,2,"Cruiser", true);
+    public static List<Boat> shipList = new ArrayList<Boat>();
     static Boat currentBoat;
+
+    public static int playerHealth = battleship.getHealth() + cruiser.getHealth();
 
 
     // Declare playerGrid variable
@@ -69,7 +71,6 @@ public class Main extends Application {
         Socket sock = new Socket("localhost", httpd);
         FromServer fromserver = new FromServer(sock);
         ToServer   toserver = new ToServer(sock, opponentGrid.getChildren());
-        new Thread(toserver).start();
         new Thread(fromserver).start();
     }
 
