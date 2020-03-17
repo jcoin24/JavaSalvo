@@ -29,4 +29,8 @@ public class Boat {
     public int getHealth() {
         return health;
     }
+  
+    public void setHealth() {
+        this.health = --health;
+    }
 }
