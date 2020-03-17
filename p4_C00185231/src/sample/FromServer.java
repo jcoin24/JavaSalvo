@@ -65,12 +65,10 @@ public class FromServer implements Runnable {
             System.out.println("Hit");
 
             Main.playerHealth = --Main.playerHealth;
-
           }else{
             out.writeBytes("Miss! \n");
             System.out.println("Miss");
           }
-
           if(Main.playerHealth == 0){
             System.out.println("Your Ships are all suck!\n You have sadly Lost\n");
             out.writeBytes("All enemy ships sunk you have won\n");
