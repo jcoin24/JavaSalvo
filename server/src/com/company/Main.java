@@ -33,7 +33,7 @@ public class Main {
             new Thread(fromclient1).start();
             new Thread(fromclient2).start();
 
-            System.out.println("server listening on local port 8081");
+            //System.out.println("server listening on local port 8081");
         }
     }
     

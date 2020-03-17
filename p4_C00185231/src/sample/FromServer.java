@@ -7,6 +7,10 @@
 package sample;
 
 
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+
+import java.awt.*;
 import java.io.*;
 import java.net.*;
 
@@ -15,6 +19,7 @@ public class FromServer implements Runnable {
   Socket sock;
   BufferedReader in = null;
   DataOutputStream out = null;
+
 
   public FromServer(Socket sock)throws Exception {
     this.sock = sock;
@@ -33,11 +38,22 @@ public class FromServer implements Runnable {
         // returns true if the input is an integer with 1 or more digits
         // I'm not sure how exactly you're using the array of buttoms to determine
         // hits so I'll let you do that
-        if(input.matches("[0-9]+")){
-          out.writeBytes("Hit!" + "\n");
-          out.flush();
-        }
+        try{
+          int target = Integer.parseInt(input);
+          Button tempButton = (Button) Main.myList.get(target);
+          if(tempButton.getText().compareTo("+") == 0 || tempButton.getText().compareTo("*") == 0){
+            //((Button) Main.myList.get(target)).setText("Hit");
+            out.writeBytes("Hit! \n");
+            System.out.println("Hit");
+          }else{
+            out.writeBytes("Miss! \n");
+            System.out.println("Miss");
+          }
 
+          out.flush();
+        }catch (Exception e){
+          //System.out.println("Failed to read enemy input");
+        }
       }
     } catch (Exception e) {
       System.out.println("Exception: " + e);
