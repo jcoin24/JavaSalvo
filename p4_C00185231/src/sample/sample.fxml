@@ -96,7 +96,7 @@
                   </Button>
                </children>
             </HBox>
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="405.0" text="Oponents Board">
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="405.0" text="Opponents Board">
                <font>
                   <Font name="Comic Sans MS" size="24.0" />
                </font>

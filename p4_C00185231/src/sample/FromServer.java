@@ -35,9 +35,6 @@ public class FromServer implements Runnable {
 
     try {
 
-      out.writeBytes("First\n");
-      out.flush();
-
       while ((input=in.readLine()) != null) {
         System.out.println("Client received: " + input);
 
@@ -66,7 +63,7 @@ public class FromServer implements Runnable {
           }
 
           if(tempButton.getText().compareTo("+") == 0){
-
+            Main.myTurn = true;
             Platform.runLater(() -> ((Button) Main.myList.get(target)).setText("X"));
 
             Main.shipList.get(0).setHealth();
@@ -80,7 +77,7 @@ public class FromServer implements Runnable {
             Main.playerHealth = --Main.playerHealth;
 
           }else if(tempButton.getText().compareTo("*") == 0){
-
+            Main.myTurn = true;
             Platform.runLater(() -> ((Button) Main.myList.get(target)).setText("X"));
 
             Main.shipList.get(1).setHealth();
@@ -93,12 +90,13 @@ public class FromServer implements Runnable {
 
             Main.playerHealth = --Main.playerHealth;
           }else{
+            Main.myTurn = true;
             Platform.runLater(() -> ((Button) Main.myList.get(target)).setText("O"));
             out.writeBytes("Miss!\n");
             System.out.println("Miss");
           }
           if(Main.playerHealth == 0){
-            System.out.println("Your Ships are all suck!\n You have sadly Lost\n");
+            System.out.println("Your Ships are all sunk!\n You have sadly Lost\n");
             out.writeBytes("All enemy ships sunk you have won\n");
           }
 

@@ -28,17 +28,23 @@ public class ToServer {
       int temp = i;
       Button buttom = (Button)opButtons.get(i); // yes we do mean buttom
       buttom.setOnAction(event -> {
-        try {
-          System.out.println("Sending '" + buttom.getId() + "' to other client");
-          currentTarget = Integer.parseInt(buttom.getId());
-          out.writeBytes( buttom.getId() + "\n");
-          out.flush();
-        } catch (IOException e) {
-          System.out.println("Exception: " + e);
+        if (Main.myTurn) {
+          Main.myTurn = false;
+          try {
+            System.out.println("Sending '" + buttom.getId() + "' to other client");
+            currentTarget = Integer.parseInt(buttom.getId());
+            out.writeBytes(buttom.getId() + "\n");
+            out.flush();
+          } catch (IOException e) {
+            System.out.println("Exception: " + e);
+          }
+        } else {
+          System.out.println("It's not your turn!");
         }
       });
+      }
     }
-  }
+
 
 
 } // end of class ToServer
