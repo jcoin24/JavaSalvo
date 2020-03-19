@@ -1,6 +1,7 @@
 package sample;
 
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ public class ToServer {
   BufferedReader in = null;
   DataOutputStream out = null;
   private ObservableList<Node> opButtons;
+  public static int currentTarget = 0;
 
   public ToServer(Socket sock, ObservableList<Node> opButtons) throws Exception {
     this.sock = sock;
@@ -23,10 +25,12 @@ public class ToServer {
 
 
     for(int i = 1; i < opButtons.size(); i++){
+      int temp = i;
       Button buttom = (Button)opButtons.get(i); // yes we do mean buttom
       buttom.setOnAction(event -> {
         try {
           System.out.println("Sending '" + buttom.getId() + "' to other client");
+          currentTarget = Integer.parseInt(buttom.getId());
           out.writeBytes( buttom.getId() + "\n");
           out.flush();
         } catch (IOException e) {

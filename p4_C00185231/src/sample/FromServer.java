@@ -9,6 +9,7 @@ package sample;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.application.Platform;
 
 import java.awt.*;
 import java.io.*;
@@ -18,8 +19,9 @@ import java.util.MissingFormatArgumentException;
 public class FromServer implements Runnable {
 
   Socket sock;
-  BufferedReader in = null;
-  DataOutputStream out = null;
+  BufferedReader in;
+  DataOutputStream out;
+  boolean turn = false;
 
 
   public FromServer(Socket sock)throws Exception {
@@ -30,9 +32,25 @@ public class FromServer implements Runnable {
 
   public void run() {
     String input;
+
     try {
+
+      out.writeBytes("First\n");
+      out.flush();
+
       while ((input=in.readLine()) != null) {
         System.out.println("Client received: " + input);
+
+        if(input.compareTo("Hit!") == 0){
+          Platform.runLater(() -> ((Button) Main.opList.get(ToServer.currentTarget)).setText("X"));
+        }else if (input.compareTo("Miss!") == 0){
+          try{
+            Platform.runLater(() -> ((Button) Main.opList.get(ToServer.currentTarget)).setText("O"));
+          }
+          catch (Exception e){
+            System.out.println("Some error");
+          }
+        }
 
         // this is where we check if the guess is a hit or a miss
         // for now I just left the conditional as a regular expression that
@@ -42,31 +60,41 @@ public class FromServer implements Runnable {
         try{
           int target = Integer.parseInt(input);
           Button tempButton = (Button) Main.myList.get(target);
+
+          if(target < 0){
+            System.out.println("Target was negative");
+          }
+
           if(tempButton.getText().compareTo("+") == 0){
+
+            Platform.runLater(() -> ((Button) Main.myList.get(target)).setText("X"));
 
             Main.shipList.get(0).setHealth();
             if (Main.shipList.get(0).getHealth() == 0){
               out.writeBytes("Sunk a battleship\n");
               System.out.println("Your battleship was sunk");
             }
-            out.writeBytes("Hit! \n");
+            out.writeBytes("Hit!\n");
             System.out.println("Hit");
 
             Main.playerHealth = --Main.playerHealth;
 
           }else if(tempButton.getText().compareTo("*") == 0){
 
+            Platform.runLater(() -> ((Button) Main.myList.get(target)).setText("X"));
+
             Main.shipList.get(1).setHealth();
             if (Main.shipList.get(1).getHealth() == 0){
               out.writeBytes("Sunk a Cruiser\n");
               System.out.println("Your Cruiser was sunk");
             }
-            out.writeBytes("Hit! \n");
+            out.writeBytes("Hit!\n");
             System.out.println("Hit");
 
             Main.playerHealth = --Main.playerHealth;
           }else{
-            out.writeBytes("Miss! \n");
+            Platform.runLater(() -> ((Button) Main.myList.get(target)).setText("O"));
+            out.writeBytes("Miss!\n");
             System.out.println("Miss");
           }
           if(Main.playerHealth == 0){

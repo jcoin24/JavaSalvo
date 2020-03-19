@@ -51,10 +51,7 @@ public class Controller{
     }
 
     public void readyGame(ActionEvent actionEvent) {
-        System.out.println("Game is ready");
+
     }
 
-    public static void ChangeGui(int index){
-        ((Button) Main.myList.get(index)).setText("Miss");
-    }
 }
