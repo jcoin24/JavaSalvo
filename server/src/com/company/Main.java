@@ -6,6 +6,7 @@
 
 package com.company;
 
+import java.io.DataOutputStream;
 import java.net.*;
 
 public class Main {
@@ -17,6 +18,7 @@ public class Main {
         boolean gameStart = false;
         final int httpd = 8081;
         ServerSocket serverSock = new ServerSocket(httpd);
+
         System.out.println("server listening on local port 8081");
 
         

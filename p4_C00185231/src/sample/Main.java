@@ -18,7 +18,10 @@ import java.util.List;
 
 public class Main extends Application {
 
-    // Declared list to have all the Nodes of the gridpane
+    // boolean to control whose turn it is
+    static boolean myTurn = true;
+
+    // Declared list to have all the Nodes of the gridpanes
     public static ObservableList<Node> myList;
     public static ObservableList<Node> opList;
 
