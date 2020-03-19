@@ -20,12 +20,14 @@ public class Main extends Application {
 
     // Declared list to have all the Nodes of the gridpane
     public static ObservableList<Node> myList;
+    public static ObservableList<Node> opList;
 
     // Values for defining the ships and list to store them
     static Boat battleship = new Boat(3,3,"Battleship", true);
     static Boat cruiser = new Boat(2,2,"Cruiser", true);
     public static List<Boat> shipList = new ArrayList<Boat>();
     static Boat currentBoat;
+    public static Button readyButton;
 
     public static int playerHealth = battleship.getHealth() + cruiser.getHealth();
 
@@ -46,7 +48,7 @@ public class Main extends Application {
         playerGrid = (GridPane) primaryStage.getScene().lookup("#playerGrid");
         GridPane opponentGrid = (GridPane) primaryStage.getScene().lookup("#opponentGrid");
         HBox boatBox = (HBox) primaryStage.getScene().lookup("#boatColumn");
-        Button readyButton = (Button) primaryStage.getScene().lookup("#readyButton");
+        readyButton = (Button) primaryStage.getScene().lookup("#readyButton");
 
 
 
@@ -63,6 +65,7 @@ public class Main extends Application {
         }
 
         myList = playerGrid.getChildren();
+        opList = opponentGrid.getChildren();
         primaryStage.show();
 
 
